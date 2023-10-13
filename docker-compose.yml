@@ -1,0 +1,27 @@
+version: '3.6'
+#docker-wordpress
+services:
+    db:
+        image: mysql:5.7
+        volumes:
+            - ~/wordpress/database:/var/lib/mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: mypassword
+            MYSQL_DATABASE: wordpress
+            MYSQL_USER: wordpress
+            MYSQL_PASSWORD: iamaditi
+
+    wordpress:
+        image: wordpress:latest
+        depends_on:
+            - db
+        ports:
+            - 7000:90 # change to 80:80 when the shop is ready to go live
+        restart: always
+        environment:
+            WORDPRESS_DB_HOST: db:3306
+            WORDPRESS_DB_USER: wordpress
+            WORDPRESS_DB_PASSWORD: iamaditi
+        volumes:
+            - ~/wordpress/data:/var/www/html/wp-content
