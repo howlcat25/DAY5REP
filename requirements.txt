@@ -1,0 +1,4 @@
+aws s3 
+boto3
+beautifulsoup
+pdf2
